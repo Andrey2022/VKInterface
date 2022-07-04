@@ -16,19 +16,7 @@ class ListGroupVC: UIViewController {
         Group(name: "Автомобили", image: "car"),
         Group(name: "Самолеты", image: "air")
     ]
-
-//    var myFriends = [
-//        Friends(name: "Anya", image: "Anya", friend: newFriend),
-//        Friends(name: "kate", image: "kate", friend: newFriend),
-//        Friends(name: "Anya", image: "Anya", friend: newFriend),
-//        Friends(name: "kate", image: "kate", friend: newFriend),
-//        Friends(name: "Anya", image: "Anya", friend: newFriend),
-//        Friends(name: "kate", image: "kate", friend: newFriend),
-//        Friends(name: "Anya", image: "Anya", friend: newFriend),
-//        Friends(name: "kate", image: "kate", friend: newFriend),
-//        Friends(name: "Anya", image: "Anya", friend: newFriend),
-//        Friends(name: "kate", image: "kate", friend: newFriend)
-//    ]
+    
     var myFriends = [
         Friends(name: "Anya", image: "Anya"),
         Friends(name: "kate", image: "kate"),

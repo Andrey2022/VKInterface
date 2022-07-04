@@ -11,7 +11,7 @@ class LentaNewsVC: UIViewController {
 
     @IBOutlet var lentaOutletCollectionView: UICollectionView!
     
-//    var arrayFullingLenta : FullingLentaCell = []
+    var arrayFullingLenta : [FullingLentaCell] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,24 +21,28 @@ class LentaNewsVC: UIViewController {
             UINib(nibName: "LentaCVCell", bundle: nil),
             forCellWithReuseIdentifier: Constants.Cell.lentaCVCell)
         
-//        uploadNews()
+        uploadNews()
     }
     
-//    private func uploadNews() {
-//        let news: [FullingLentaCell] = [
-//            .init(smallImage: UIImage(named: "kate"), nameNewsLenta: "СРОЧНО!", timeAgo: "5 min ago", textTFNews: "Констрейнты убежали", bigImage: UIImage(named: "moto"), resource: "www.gb.ru", likeNews: 331),
-//            .init(smallImage: UIImage(named: "Anya"), nameNewsLenta: "СРОЧНО!", timeAgo: "5 min ago", textTFNews: "Констрейнты убежали", bigImage: UIImage(named: "air"), resource: "www.gb.ru", likeNews: 331)
-//        ]
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            self.
-//        }
-//    }
+    private func uploadNews() {
+        let news: [FullingLentaCell] = [
+            .init(smallImage: UIImage(named: "kate"), nameNewsLenta: "СРОЧНО!", timeAgo: "5 min ago", textTFNews: "Констрейнты убежали", bigImage: UIImage(named: "moto"), resource: "www.gb.ru", likeNews: 331),
+            .init(smallImage: UIImage(named: "Anya"), nameNewsLenta: " NO СРОЧНО!", timeAgo: "5 min ago", textTFNews: "Констрейнты убежали", bigImage: UIImage(named: "air"), resource: "www.gb.ru", likeNews: 331),
+            .init(smallImage: UIImage(named: "kate"), nameNewsLenta: "YEs!", timeAgo: "5 min ago", textTFNews: "Констрейнты убежали", bigImage: UIImage(named: "big"), resource: "www.gb.ru", likeNews: 331),
+            .init(smallImage: UIImage(named: "Anya"), nameNewsLenta: "СРОЧНО!", timeAgo: "5 min ago", textTFNews: "Констрейнты убежали", bigImage: UIImage(named: "car"), resource: "www.gb.ru", likeNews: 331)
+            
+        ]
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.arrayFullingLenta = news
+            self.lentaOutletCollectionView.reloadData()
+        }
+    }
 }
 
 extension LentaNewsVC: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return arrayFullingLenta.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -48,11 +52,7 @@ extension LentaNewsVC: UICollectionViewDataSource {
 
 extension LentaNewsVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        (cell as? LentaCVCell)?.configur(with: .init(smallImage: UIImage(named: "kate"), nameNewsLenta: "СРОЧНО!", timeAgo: "5 minuts ago",
-            textTFNews: "Эта ячейка долго собиралась, на нее было потрачено столько времени, а почему отвелились констрейнты я не понял",
-            bigImage: UIImage(named: "moto"), resource: "site: www.GB.ru", likeNews: 9999))
-
-//            nameImageFriend: newFriends[indexPath.row].image!,
-//            nameFriend: newFriends[indexPath.row].name)
+        (cell as? LentaCVCell)?.configur(with: self.arrayFullingLenta[indexPath.row])
+        
     }
 }

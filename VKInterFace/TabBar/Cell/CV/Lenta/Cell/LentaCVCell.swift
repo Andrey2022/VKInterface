@@ -25,6 +25,10 @@ class LentaCVCell: UICollectionViewCell {
     }
     
     @IBAction func giveMeLikeLenta(_ sender: Any) {
+        print("U take ME Like!")
+        var namesomeLike = Int(howMuchLike.text!) ?? 0
+        namesomeLike = namesomeLike + 1
+        howMuchLike.text = String(namesomeLike)
     }
     
     func configur(with item: FullingLentaCell){

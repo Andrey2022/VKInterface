@@ -1,7 +1,7 @@
 //
 //  ViewController.swift
 //  VKInterFace
-//
+// https://www.youtube.com/watch?v=3HRWDtYK0Jo
 //  Created by user on 01/07/2022.
 //
 
@@ -25,14 +25,15 @@ class FirstViewController: UIViewController {
         Friend(name: "Kate", image: "kate")
     ]
 
-    @IBOutlet var topicTV: UITableView!
+    
+    
     @IBOutlet var collectionHistoryFriend: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.topicTV.register(
-            UINib(nibName: "TopCell", bundle: nil),
-            forCellReuseIdentifier: Constants.Cell.topCellXib)
+//        self.topicTV.register(
+//            UINib(nibName: "TopCell", bundle: nil),
+//            forCellReuseIdentifier: Constants.Cell.topCellXib)
         
         self.collectionHistoryFriend.register(
             UINib(nibName: "HistoryFriendCellXib", bundle: nil),
@@ -57,7 +58,7 @@ extension FirstViewController: UITableViewDataSource {
 
 extension FirstViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        (cell as? TopicTVCell)?.configurate(name: "News", name2: "For you", name3: "Trending")
+        (cell as? TopicTVCell)?.configurate(name: "News", name2: "For you")
         print(cell)
     }
     
