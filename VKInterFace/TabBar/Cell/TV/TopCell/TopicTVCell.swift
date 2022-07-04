@@ -11,6 +11,7 @@ class TopicTVCell: UITableViewCell {
     
     @IBOutlet var FirstLabel: UILabel!
     @IBOutlet var SecondLabel: UILabel!
+    @IBOutlet var ThirdLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,10 +24,11 @@ class TopicTVCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configurate(name: String, name2: String) {
+    func configurate(name: String, name2: String, name3: String) {
         
         FirstLabel?.text = name
         SecondLabel?.text = name2
+        ThirdLabel?.text = name3
     }
 
 }

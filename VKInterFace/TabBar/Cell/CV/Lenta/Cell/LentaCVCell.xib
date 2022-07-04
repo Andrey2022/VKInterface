@@ -127,6 +127,7 @@
             <size key="customSize" width="193" height="375"/>
             <connections>
                 <outlet property="firstLabelBoldLenta" destination="JtR-W9-k4A" id="voF-3h-NmX"/>
+                <outlet property="howMuchLike" destination="qTz-8T-cSA" id="7Wu-Yd-C1F"/>
                 <outlet property="imageGroupInLenta" destination="UgJ-aa-FdX" id="fIy-lV-Vug"/>
                 <outlet property="imageViewLentaInfo" destination="EoR-NE-gyZ" id="VAs-Qq-jzZ"/>
                 <outlet property="labelHowLongIsHere" destination="fis-M8-5gk" id="8pI-Yj-4Xo"/>

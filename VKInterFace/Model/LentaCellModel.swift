@@ -10,7 +10,7 @@ import UIKit
 struct FullingLentaCell {
     
     var smallImage: UIImage! = nil
-    var nameNewsLenta: String
+    var nameNewsLenta: String = ""
     var timeAgo: String
     var textTFNews: String
     var bigImage: UIImage!

@@ -17,6 +17,7 @@
 		CE09D414286F1CE4008B05D3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09D413286F1CE4008B05D3 /* Constants.swift */; };
 		CE09D41A286F1EB0008B05D3 /* TopicTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09D419286F1EB0008B05D3 /* TopicTV.swift */; };
 		CE09D41C286F1EFC008B05D3 /* TopicTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09D41B286F1EFC008B05D3 /* TopicTVCell.swift */; };
+		CE09D421286F3745008B05D3 /* TopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE09D41F286F3745008B05D3 /* TopCell.xib */; };
 		CE09D425286F3C28008B05D3 /* HistoryFriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09D423286F3C28008B05D3 /* HistoryFriendCell.swift */; };
 		CE09D426286F3C28008B05D3 /* HistoryFriendCellXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE09D424286F3C28008B05D3 /* HistoryFriendCellXib.xib */; };
 		CE09D429286F40AE008B05D3 /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE09D428286F40AE008B05D3 /* Friends.swift */; };
@@ -49,6 +50,7 @@
 		CE09D413286F1CE4008B05D3 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE09D419286F1EB0008B05D3 /* TopicTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTV.swift; sourceTree = "<group>"; };
 		CE09D41B286F1EFC008B05D3 /* TopicTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicTVCell.swift; sourceTree = "<group>"; };
+		CE09D41F286F3745008B05D3 /* TopCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopCell.xib; sourceTree = "<group>"; };
 		CE09D423286F3C28008B05D3 /* HistoryFriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFriendCell.swift; sourceTree = "<group>"; };
 		CE09D424286F3C28008B05D3 /* HistoryFriendCellXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryFriendCellXib.xib; sourceTree = "<group>"; };
 		CE09D428286F40AE008B05D3 /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 		CE09D430286F5E48008B05D3 /* TopCell */ = {
 			isa = PBXGroup;
 			children = (
+				CE09D41F286F3745008B05D3 /* TopCell.xib */,
 				CE09D41B286F1EFC008B05D3 /* TopicTVCell.swift */,
 			);
 			path = TopCell;
@@ -293,6 +296,7 @@
 			files = (
 				CE09D4452871AB47008B05D3 /* Info.storyboard in Resources */,
 				CE09D407286F139C008B05D3 /* LaunchScreen.storyboard in Resources */,
+				CE09D421286F3745008B05D3 /* TopCell.xib in Resources */,
 				CE09D435286F5E85008B05D3 /* GroupCellXib.xib in Resources */,
 				CE59C6BD287208ED000746E8 /* LentaStoryboard.storyboard in Resources */,
 				CE09D404286F139C008B05D3 /* Assets.xcassets in Resources */,

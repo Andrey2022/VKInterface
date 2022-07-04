@@ -18,6 +18,7 @@ class LentaCVCell: UICollectionViewCell {
     @IBOutlet var imageViewLentaInfo: UIImageView!
     @IBOutlet var resourcesAboutInfo: UILabel!
     
+    @IBOutlet var howMuchLike: UILabel!
     
     
     override func awakeFromNib() {

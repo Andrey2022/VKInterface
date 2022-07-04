@@ -9,6 +9,13 @@ import UIKit
 
 class ListGroupVC: UIViewController {
     
+    @IBOutlet var searchBarFriends: UISearchBar! {
+        didSet {
+            searchBarFriends.delegate = self
+        }
+    }
+    
+    var filterFriens = [Friends]()
 //    private var displayItems: [BasicDisplayItem] = []
     private var dataListGroup = [
         Group(name: "Большие машины", image: "big"),
@@ -16,12 +23,26 @@ class ListGroupVC: UIViewController {
         Group(name: "Автомобили", image: "car"),
         Group(name: "Самолеты", image: "air")
     ]
-    
+
+//    var myFriends = [
+//        Friends(name: "Anya", image: "Anya", friend: newFriend),
+//        Friends(name: "kate", image: "kate", friend: newFriend),
+//        Friends(name: "Anya", image: "Anya", friend: newFriend),
+//        Friends(name: "kate", image: "kate", friend: newFriend),
+//        Friends(name: "Anya", image: "Anya", friend: newFriend),
+//        Friends(name: "kate", image: "kate", friend: newFriend),
+//        Friends(name: "Anya", image: "Anya", friend: newFriend),
+//        Friends(name: "kate", image: "kate", friend: newFriend),
+//        Friends(name: "Anya", image: "Anya", friend: newFriend),
+//        Friends(name: "kate", image: "kate", friend: newFriend)
+//    ]
     var myFriends = [
         Friends(name: "Anya", image: "Anya"),
         Friends(name: "kate", image: "kate"),
         Friends(name: "Anya", image: "Anya")
     ]
+    
+    var sortedFriends = [Character: [Friends]]()
     
     @IBOutlet var listGroupTV: UITableView!
     
@@ -31,6 +52,25 @@ class ListGroupVC: UIViewController {
         self.listGroupTV.register(
             UINib(nibName: "GroupCellXib", bundle: nil),
             forCellReuseIdentifier: Constants.Cell.groupCellXib)
+        
+        self.sortedFriends = sort(myFriends: myFriends)
+    }
+    
+    private func sort(myFriends: [Friends]) -> [Character: [Friends]] {
+        var friendsDict = [Character: [Friends]]()
+        myFriends.forEach() { friend in
+            
+            guard let firstChar = friend.name.first else {return}
+            
+            if var  thisCharFriend = friendsDict[firstChar] {
+                thisCharFriend.append(friend)
+                friendsDict[firstChar] = thisCharFriend
+            } else {
+                friendsDict[firstChar] = [friend]
+            }
+        }
+        
+        return friendsDict
     }
     
     private func presentControllerFor(indexPath: IndexPath){
@@ -45,23 +85,36 @@ class ListGroupVC: UIViewController {
 }
 
 extension ListGroupVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myFriends.count
-    }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sortedFriends.keys.count
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let keySorted = sortedFriends.keys.sorted()
+        let frieds = sortedFriends[keySorted[section]]?.count ?? 0
+        
+        return frieds
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: Constants.Cell.groupCellXib, for: indexPath)
     }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        String(sortedFriends.keys.sorted()[section])
+    }
+    
 }
 extension ListGroupVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let firstChar = sortedFriends.keys.sorted()[indexPath.section]
+        let friends = sortedFriends[firstChar]!
+        let friend: Friends = friends[indexPath.row]
+        
         (cell as? GroupTVCell)?.configurate(
-            name: myFriends[indexPath.row].name,
-            image: myFriends[indexPath.row].image!)
+            name: friend.name,
+            image: friend.image!)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -80,3 +133,9 @@ extension ListGroupVC: UITableViewDelegate{
     }
 }
 
+extension ListGroupVC: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+    }
+}

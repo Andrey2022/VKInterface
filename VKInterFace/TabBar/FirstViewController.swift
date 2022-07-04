@@ -25,15 +25,14 @@ class FirstViewController: UIViewController {
         Friend(name: "Kate", image: "kate")
     ]
 
-    
-    
+    @IBOutlet var topicTV: UITableView!
     @IBOutlet var collectionHistoryFriend: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.topicTV.register(
-//            UINib(nibName: "TopCell", bundle: nil),
-//            forCellReuseIdentifier: Constants.Cell.topCellXib)
+        self.topicTV.register(
+            UINib(nibName: "TopCell", bundle: nil),
+            forCellReuseIdentifier: Constants.Cell.topCellXib)
         
         self.collectionHistoryFriend.register(
             UINib(nibName: "HistoryFriendCellXib", bundle: nil),
@@ -58,7 +57,7 @@ extension FirstViewController: UITableViewDataSource {
 
 extension FirstViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        (cell as? TopicTVCell)?.configurate(name: "News", name2: "For you")
+        (cell as? TopicTVCell)?.configurate(name: "News", name2: "For you", name3: "Trending")
         print(cell)
     }
     

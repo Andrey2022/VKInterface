@@ -52,7 +52,6 @@ extension LentaNewsVC: UICollectionViewDataSource {
 
 extension LentaNewsVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        (cell as? LentaCVCell)?.configur(with: self.arrayFullingLenta[indexPath.row])
-        
+        (cell as? LentaCVCell)?.configur(with: arrayFullingLenta[indexPath.row])
     }
 }
