@@ -29,7 +29,7 @@ class InfoVC: UIViewController {
     
     func configur (like: Int, image: UIImage) {
         labelSumLike.text = String(someLike)
-        imageInfo.image = UIImage(named: "kate")
+        imageInfo.image = image
     }
 }
 

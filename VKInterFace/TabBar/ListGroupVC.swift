@@ -14,37 +14,26 @@ class ListGroupVC: UIViewController {
             searchBarFriends.delegate = self
         }
     }
+    @IBOutlet var listGroupTV: UITableView!
+    
+    var myFriends = [
+        Friends(name: "Маршал", image: "dog1"),
+        Friends(name: "Крепыш", image: "dog2"),
+        Friends(name: "Зума", image: "dog3"),
+        Friends(name: "Зума", image: "dog4"),
+        Friends(name: "Зума", image: "dog5"),
+        
+        Friends(name: "Маршал", image: "dog6"),
+        Friends(name: "Крепыш", image: "dog7"),
+        Friends(name: "Зума", image: "dog8"),
+        Friends(name: "Зума", image: "dog9"),
+        Friends(name: "Зума", image: "dog10"),
+        
+    ]
+    var arrayForFuncSection = [Character]()
     
     var filterFriens = [Friends]()
-//    private var displayItems: [BasicDisplayItem] = []
-    private var dataListGroup = [
-        Group(name: "Большие машины", image: "big"),
-        Group(name: "Мотоциклы", image: "moto"),
-        Group(name: "Автомобили", image: "car"),
-        Group(name: "Самолеты", image: "air")
-    ]
-
-//    var myFriends = [
-//        Friends(name: "Anya", image: "Anya", friend: newFriend),
-//        Friends(name: "kate", image: "kate", friend: newFriend),
-//        Friends(name: "Anya", image: "Anya", friend: newFriend),
-//        Friends(name: "kate", image: "kate", friend: newFriend),
-//        Friends(name: "Anya", image: "Anya", friend: newFriend),
-//        Friends(name: "kate", image: "kate", friend: newFriend),
-//        Friends(name: "Anya", image: "Anya", friend: newFriend),
-//        Friends(name: "kate", image: "kate", friend: newFriend),
-//        Friends(name: "Anya", image: "Anya", friend: newFriend),
-//        Friends(name: "kate", image: "kate", friend: newFriend)
-//    ]
-    var myFriends = [
-        Friends(name: "Anya", image: "Anya"),
-        Friends(name: "kate", image: "kate"),
-        Friends(name: "Anya", image: "Anya")
-    ]
-    
     var sortedFriends = [Character: [Friends]]()
-    
-    @IBOutlet var listGroupTV: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +42,9 @@ class ListGroupVC: UIViewController {
             UINib(nibName: "GroupCellXib", bundle: nil),
             forCellReuseIdentifier: Constants.Cell.groupCellXib)
         
+        //todo
         self.sortedFriends = sort(myFriends: myFriends)
+        filterFriens = myFriends
     }
     
     private func sort(myFriends: [Friends]) -> [Character: [Friends]] {
@@ -79,7 +70,8 @@ class ListGroupVC: UIViewController {
         let vc = stroryboard.instantiateInitialViewController()
         if let vc = vc as? InfoVC {
             self.present(vc, animated: true)
-            vc.configur(like: 123, image: myFriends[indexPath.row].image)
+            let nowSection = sortedFriends.keys.sorted()[indexPath.section]
+            vc.configur(like: 123, image: (sortedFriends[nowSection]?[indexPath.row].image)!)
         }
     }
 }
@@ -136,6 +128,11 @@ extension ListGroupVC: UITableViewDelegate{
 extension ListGroupVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
+        if searchText.isEmpty {
+            filterFriens = myFriends
+        } else {
+            filterFriens = myFriends.filter {$0.name.contains(searchText)}
+        listGroupTV.reloadData()
+        }
     }
 }
