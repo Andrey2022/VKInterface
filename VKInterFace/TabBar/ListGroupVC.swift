@@ -17,23 +17,23 @@ class ListGroupVC: UIViewController {
     @IBOutlet var listGroupTV: UITableView!
     
     var myFriends = [
-        Friends(name: "Маршал", image: "маршал"),
-        Friends(name: "Крепыш", image: "крепыш"),
-        Friends(name: "Зума", image: "зума"),
-        Friends(name: "Собака", image: "дог"),
-        Friends(name: "Скай", image: "скай"),
+        Friends(name: "Маршал", image: "dog1"),
+        Friends(name: "Крепыш", image: "dog2"),
+        Friends(name: "Зума", image: "dog3"),
+        Friends(name: "Зума", image: "dog4"),
+        Friends(name: "Зума", image: "dog5"),
         
-        Friends(name: "Эверест", image: "эверест"),
-        Friends(name: "Собака 7", image: "dog7"),
-        Friends(name: "Собака 8", image: "dog8"),
-        Friends(name: "Собака 9", image: "dog9"),
-        Friends(name: "Собака 10", image: "dog10"),
+        Friends(name: "Маршал", image: "dog6"),
+        Friends(name: "Крепыш", image: "dog7"),
+        Friends(name: "Зума", image: "dog8"),
+        Friends(name: "Зума", image: "dog9"),
+        Friends(name: "Зума", image: "dog10"),
         
     ]
+    var arrayForFuncSection = [Character]()
     
     var filterFriens = [Friends]()
     var sortedFriends = [Character: [Friends]]()
-    var isSorted = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +43,11 @@ class ListGroupVC: UIViewController {
             forCellReuseIdentifier: Constants.Cell.groupCellXib)
         
         //todo
-        self.sortedFriends = sortForDict(myFriends: myFriends)
+        self.sortedFriends = sort(myFriends: myFriends)
         filterFriens = myFriends
     }
     
-    private func sortForDict(myFriends: [Friends]) -> [Character: [Friends]] {
+    private func sort(myFriends: [Friends]) -> [Character: [Friends]] {
         var friendsDict = [Character: [Friends]]()
         myFriends.forEach() { friend in
             
@@ -79,24 +79,15 @@ class ListGroupVC: UIViewController {
 extension ListGroupVC: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        if isSorted {
-            return filterFriens.count
-        } else {
-            return sortedFriends.keys.count
-        }
         return sortedFriends.keys.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isSorted {
-            return filterFriens.count
-        } else {
-            let keySorted = sortedFriends.keys.sorted()
-            let friends = sortedFriends[keySorted[section]]?.count ?? 0
-    
-            return friends
-        }
-        return 10
+        
+        let keySorted = sortedFriends.keys.sorted()
+        let frieds = sortedFriends[keySorted[section]]?.count ?? 0
+        
+        return frieds
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: Constants.Cell.groupCellXib, for: indexPath)
@@ -109,19 +100,13 @@ extension ListGroupVC: UITableViewDataSource {
 extension ListGroupVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if isSorted {
-            let friend: Friends = filterFriens[indexPath.row]
-            (cell as? GroupTVCell)?.configurate(
-                name: friend.name,
-                image: friend.image!)
-        } else {
-            let firstChar = sortedFriends.keys.sorted()[indexPath.section]
-            let friends = sortedFriends[firstChar]!
-            let friend: Friends = friends[indexPath.row]
-            (cell as? GroupTVCell)?.configurate(
-                name: friend.name,
-                image: friend.image!)
-        }
+        let firstChar = sortedFriends.keys.sorted()[indexPath.section]
+        let friends = sortedFriends[firstChar]!
+        let friend: Friends = friends[indexPath.row]
+        
+        (cell as? GroupTVCell)?.configurate(
+            name: friend.name,
+            image: friend.image!)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -144,11 +129,8 @@ extension ListGroupVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            isSorted = false
             filterFriens = myFriends
-            listGroupTV.reloadData()
         } else {
-            isSorted = true
             filterFriens = myFriends.filter {$0.name.contains(searchText)}
         listGroupTV.reloadData()
         }
